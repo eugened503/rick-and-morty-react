@@ -22,15 +22,21 @@ const useStyles = makeStyles((theme) => ({
 function Navigation() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
-  
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
     localStorage.setItem("value", newValue);
   };
 
   useEffect(() => {
-    setValue(JSON.parse(localStorage.getItem("value")));
-  }, []);
+    if (value !== null) {
+      setValue(JSON.parse(localStorage.getItem("value")));
+    }
+  }, [value]);
+
+  if (value === null) {
+    setValue(0);
+  }
 
   return (
     <div className={classes.root}>

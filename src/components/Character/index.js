@@ -20,8 +20,14 @@ export default function Character() {
   const url = "/characters";
 
   useEffect(() => {
-    setID(JSON.parse(localStorage.getItem("name")));
-  }, []);
+    if (id !== null) {
+      setID(JSON.parse(localStorage.getItem("name")));
+    }
+  }, [id]);
+
+  if (id === null) {
+    setID("rick");
+  }
 
   const formik = useFormik({
     initialValues: {
